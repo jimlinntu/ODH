@@ -44,7 +44,10 @@ class enen_MerriamWebster {
                 // Ex. https://media.merriam-webster.com/audio/prons/en/us/mp3/t/test0001.mp3
                 let url = this.mw_audio_base_url + data_dir + "/"+ filename + this.mw_audio_ext;
                 audios.add(url);
+
             }
+            // Remove the audio link
+            e.remove();
         }
         return Array.from(audios);
     }
@@ -129,13 +132,159 @@ class enen_MerriamWebster {
         let audios = this.get_audios(doc);
 
         let definitions = this.get_definitions(doc);
+        let css = this.renderCSS();
 
         notes.push({
+            css,
             expression,
             audios,
             definitions
         });
 
         return notes;
+    }
+
+    renderCSS() {
+        let css = `
+            <style>
+            h1 {
+                color: #303336;
+                display: inline;
+                font-family: Playfair Display,serif;
+                font-size: 48px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                letter-spacing: 1.2px;
+                line-height: 50px;
+                padding-right: 15px;
+            }
+
+            h2 {
+                color: #265667;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 22px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 26px;
+                letter-spacing: .3px;
+                margin-bottom: .5em;
+                padding-bottom: 0;
+            }
+
+            .entry-header .fl a {
+                color: #4a7d95;
+                display: inline;
+                font-family: Playfair Display,serif;
+                font-size: 26px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                letter-spacing: .5px;
+                line-height: 36px;
+                text-decoration: none;
+            }
+
+            .first-slash, .last-slash, .prt-a {
+                color: #225f73;
+            }
+
+            .entry-attr {
+                font-size: 18px;
+                line-height: 22px;
+                color: #225f73;
+            }
+
+            .entry-attr .word-syllables {
+                white-space: pre-wrap;
+                overflow-wrap: break-word;
+                word-wrap: break-word;
+                -ms-word-break: break-all;
+                word-break: break-all;
+                word-break: break-word;
+            }
+
+            /* ----------------------- */
+            /*           .sb           */
+            .sb .t {
+                display: block;
+                padding-top: 10px;
+            }
+            /* ----------------------- */
+
+            /* <div class="dictionary-entry-1"> */
+            .vg-header h2 {
+                display: inline;
+            }
+
+            /* ----------------------- */
+            /*            .vg          */
+            /* https://stackoverflow.com/questions/10487292/position-absolute-but-relative-to-parent */
+            .vg .sb {
+               margin-bottom: 25px;
+                position: relative;
+            }
+
+            .vg .sb.has-num {
+                padding-left: 33px;
+            }
+
+            .vg .sb.has-let, .vg .sb.has-subnum {
+                padding-left: 66px;
+            }
+
+            .vg .num {
+               left: 0;
+                position: absolute;
+                top: 0;
+            }
+
+            .vg .sb.has-let .has-num-only, .vg .sb.has-subnum .has-num-only {
+                display: inline-block;
+                margin-left: -33px;
+            }
+
+            .vg .sb.has-let .has-num-only .dtText {
+                display: inline!important;
+            }
+
+            .vg span {
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 15px;
+                font-stretch: normal;
+                letter-spacing: .2px;
+                line-height: 22px;
+            }
+
+            .vg .t {
+                color: #225f73;
+                display: block;
+                padding-top: 5px;
+            }
+
+            .vg .t:before {
+                content: "//";
+                font-weight: 700;
+                padding: 0 4px 0 0;
+                color: #4a7d95;
+            }
+
+            .vg .letter {
+                left: 33px;
+                position: absolute;
+            }
+
+            .vg .sn {
+                font-weight: 700;
+            }
+
+            /* ----------------------- */
+
+            * {
+                box-sizing: border-box;
+            }
+            </style>`;
+        return css;
     }
 }
