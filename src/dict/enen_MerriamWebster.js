@@ -145,6 +145,7 @@ class enen_MerriamWebster {
     }
 
     renderCSS() {
+        let vg_span_font_size = "15px";
         let css = `
             <style>
             h1 {
@@ -171,6 +172,91 @@ class enen_MerriamWebster {
                 letter-spacing: .3px;
                 margin-bottom: .5em;
                 padding-bottom: 0;
+            }
+
+            .vg-header h2+p.entryNumbers, p.hword2 {
+                display: inline;
+            }
+
+            p.hword {
+                color: #303336;
+                display: inline;
+                font-family: Playfair Display,serif;
+                font-size: 34px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                height: 36px;
+                letter-spacing: .9px;
+                line-height: 36px;
+                padding-right: 10px;
+            }
+
+            p.hword2 {
+                display: inline;
+            }
+
+            p.hword2 {
+                color: #265667;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 22px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 26px;
+                letter-spacing: .3px;
+                margin-bottom: .5em;
+                padding-bottom: 0;
+            }
+
+            p a {
+                background-image: linear-gradient(90deg,#97bece 100%,transparent 0);
+                background-position: 0 1.15em;
+                background-repeat: repeat-x;
+                background-size: 3px 1px;
+                color: #265667;
+            }
+
+            h2, p.entryNumbers, p.hword2 {
+                color: #265667;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 22px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 26px;
+                letter-spacing: .3px;
+                margin-bottom: .5em;
+                padding-bottom: 0;
+            }
+
+            .dro .vr .va, .if {
+                font-weight: 700;
+            }
+
+            .dro .drp, .dro .ure {
+                font-weight: 700;
+            }
+
+            .dro {
+                padding-left: 33px;
+                padding-top: 10px;
+            }
+
+            .dro, .list .list-title {
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 18px;
+                letter-spacing: .2px;
+                line-height: 22px;
+            }
+
+            .prs, .uros, .vg-ins, .vrs {
+                font-size: 18px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 400;
+                letter-spacing: .2px;
+                line-height: 22px;
             }
 
             .entry-header .fl a {
@@ -251,10 +337,18 @@ class enen_MerriamWebster {
 
             .vg span {
                 font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: 15px;
+                font-size: ${vg_span_font_size};
                 font-stretch: normal;
                 letter-spacing: .2px;
                 line-height: 22px;
+            }
+
+            .vg span a {
+                background-image: linear-gradient(90deg,#97bece 100%,transparent 0);
+                background-position: 0 1.15em;
+                background-repeat: repeat-x;
+                background-size: 3px 1px;
+                color: #265667;
             }
 
             .vg .t {
@@ -277,6 +371,16 @@ class enen_MerriamWebster {
 
             .vg .sn {
                 font-weight: 700;
+            }
+
+            .vg .sb .sense.has-subnum .sub-num {
+                left: 66px;
+                position: absolute;
+            }
+
+            .vg .sb .sense.has-subnum {
+                display: block;
+                padding: 0 0 10px 33px;
             }
 
             /* ----------------------- */
