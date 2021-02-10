@@ -71,6 +71,16 @@ function registerHiddenClass() {
             hideTranslation();
         });
     }
+    // Enable anchor tags
+    for (const a of document.querySelectorAll('a')) {
+        a.target = "_blank"; // open on a new tab
+        a.onclick = (e) => {
+            // This is necessary!
+            // Otherwise if the event bubbles up,
+            // it may be cancelled by the parent handler (i.e. preventDefault)
+            e.stopPropagation();
+        };
+    }
 }
 
 function hideTranslation(){
