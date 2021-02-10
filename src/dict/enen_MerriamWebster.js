@@ -51,6 +51,11 @@ class enen_MerriamWebster {
         for (const e of elements) {
             e.remove();
         }
+        // Remove on web sentence examples (it is too messy)
+        elements = doc.querySelectorAll("#examples-anchor .on-web") || [];
+        for (const e of elements) {
+            e.remove();
+        }
         return doc;
     }
 
@@ -127,7 +132,8 @@ class enen_MerriamWebster {
         for (const div of content_divs) {
             // Only leave: ".row" and "dictionary-entry-[0-9]+"
             if (div.className.includes("row") || div.id.includes("dictionary-entry-") ||
-                div.id.includes("art-anchor") || div.id.includes("synonyms-anchor")) {
+                div.id.includes("art-anchor") || div.id.includes("synonyms-anchor") ||
+                div.id.includes("examples-anchor")) {
                 wanted_divs.push(div);
             }
         }
@@ -181,7 +187,7 @@ class enen_MerriamWebster {
     }
 
     renderCSS() {
-        let vg_span_font_size = "15px";
+        let base_font_size = "15px";
         let css = `
             <style>
             h1 {
@@ -348,7 +354,7 @@ class enen_MerriamWebster {
             .mw-list, p {
                 color: #303336;
                 font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: 18px;
+                font-size: ${base_font_size};
                 font-stretch: normal;
                 font-weight: 400;
                 letter-spacing: .2px;
@@ -407,7 +413,7 @@ class enen_MerriamWebster {
 
             .vg span {
                 font-family: Open Sans,Helvetica,Arial,sans-serif;
-                font-size: ${vg_span_font_size};
+                font-size: ${base_font_size};
                 font-stretch: normal;
                 letter-spacing: .2px;
                 line-height: 22px;
@@ -452,6 +458,27 @@ class enen_MerriamWebster {
                 display: block;
                 padding: 0 0 10px 33px;
             }
+            /* ----------------------- */
+            /*      example sentences  */
+            /* ----------------------- */
+
+            .example_sentences .t:before, .uros .t:before {
+                content: "//";
+                font-weight: 700;
+                color: #4a7d95;
+            }
+
+            .example_sentences .aq, .example_sentences .t {
+                padding: 0 0 0;
+            }
+
+            .example_sentences .t, .uros .t {
+                display: block;
+            }
+
+            span.function-label {
+                display: inline-block;
+            }
 
             /* ----------------------- */
 
@@ -470,13 +497,17 @@ class enen_MerriamWebster {
                 max-width: 100%;
             }
 
+            .example_sentences .fl, .example_sentences .il, .example_sentences .lb, .example_sentences .mw, .example_sentences .sl, .example_sentences .t, .example_sentences .vis, .uros .fl, .uros .il, .uros .lb, .uros .mw, .uros .sl, .uros .t, .uros .vis {
+                color: #225f73;
+            }
+
             /* ----------------------- */
 
             div {
                 display: block;
             }
 
-            a, ul {
+            a, ul, span {
                 margin: 0;
                 padding: 0;
                 border: 0;
