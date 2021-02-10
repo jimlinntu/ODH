@@ -38,13 +38,23 @@ class enen_MerriamWebster {
                 e.setAttribute("href", new_href);
             }
         }
+        // Convert illustration data-src to src
+        elements = doc.querySelectorAll("#art-anchor img") || [];
+        for (const e of elements) {
+            let data_src = e.dataset.src;
+            if (data_src) {
+                e.setAttribute("src", data_src);
+            }
+        }
         return doc;
     }
 
     // Given the doc (DOM), search if there are pronunciations provided
     get_audios(doc){
         let audios = new Set(); // avoid duplicates
-        const elements = doc.querySelectorAll(".entry-attr .play-pron");
+        // .entry-attr .play-pron : standard form
+        // .headword-row .play-pron : plural form
+        const elements = doc.querySelectorAll(".entry-attr .play-pron, .headword-row .play-pron") || [];
         for (const e of elements) {
             const filename = e.getAttribute("data-file");
             const data_dir = e.getAttribute("data-dir");
@@ -65,7 +75,16 @@ class enen_MerriamWebster {
 
     // Given the doc (DOM), get a standard (or deinflect) form of it (called expression here)
     get_expression(doc){
-        return this.T(doc.querySelector(".hword"));
+        let expression = this.T(doc.querySelector(".hword"))
+        if (expression) {
+            // wrap it by an anchor tag
+            let anchor = document.createElement("a");
+            anchor.text = expression;
+            anchor.href = this.mw_base_url + encodeURIComponent(expression);
+
+            expression = anchor.outerHTML;
+        }
+        return expression;
     }
 
     get_definitions(doc){
@@ -102,7 +121,8 @@ class enen_MerriamWebster {
         let wanted_divs = [];
         for (const div of content_divs) {
             // Only leave: ".row" and "dictionary-entry-[0-9]+"
-            if (div.className.includes("row") || div.id.includes("dictionary-entry-")) {
+            if (div.className.includes("row") || div.id.includes("dictionary-entry-") ||
+                div.id.includes("art-anchor")) {
                 wanted_divs.push(div);
             }
         }
