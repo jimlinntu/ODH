@@ -259,7 +259,7 @@ class enen_MerriamWebster {
                 line-height: 22px;
             }
 
-            .entry-header .fl a {
+            .entry-header .fl, .entry-header .fl a, .entry-header .lbs {
                 color: #4a7d95;
                 display: inline;
                 font-family: Playfair Display,serif;
@@ -289,6 +289,10 @@ class enen_MerriamWebster {
                 -ms-word-break: break-all;
                 word-break: break-all;
                 word-break: break-word;
+            }
+
+            .entry-attr .prs, .entry-attr.vrs, .entry-attr .word-syllables {
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
             }
 
             /* ----------------------- */
@@ -385,6 +389,27 @@ class enen_MerriamWebster {
 
             /* ----------------------- */
 
+            /* ----------------------- */
+            /*      row and col        */
+            .row {
+                display: flex;
+                flex-wrap: wrap;
+                /* margin-right: -15px;*/
+                /* margin-left: -15px; */
+            }
+
+            .col {
+                flex-basis: 0;
+                flex-grow: 1;
+                max-width: 100%;
+            }
+
+            /* ----------------------- */
+
+            div {
+                display: block;
+            }
+            /* ----------------------- */
             * {
                 box-sizing: border-box;
             }
