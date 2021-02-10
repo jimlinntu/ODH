@@ -1,6 +1,7 @@
 class enen_MerriamWebster {
     constructor() {
         this.options = undefined;
+        this.mw_root = 'https://www.merriam-webster.com/';
         this.mw_base_url = 'https://www.merriam-webster.com/dictionary/';
         this.mw_audio_base_url = 'https://media.merriam-webster.com/audio/prons/en/us/mp3/';
         this.mw_audio_ext = ".mp3";
@@ -21,11 +22,21 @@ class enen_MerriamWebster {
             return node.innerText.trim();
     }
 
-    clean_doc(doc){
+    preprocess_doc(doc){
         // remove Save Word
         let elements = doc.querySelectorAll(".save-to-list") || [];
         for (const e of elements) {
             e.remove();
+        }
+
+        // If an href is relative, make it an absolute link (to avoid base-uri in CSP)
+        elements = doc.querySelectorAll("a") || [];
+        for (const e of elements) {
+            let href = e.getAttribute("href");
+            if (href && href[0] === "/") {
+                let new_href = this.mw_root.slice(0, -1) + href;
+                e.setAttribute("href", new_href);
+            }
         }
         return doc;
     }
@@ -125,7 +136,7 @@ class enen_MerriamWebster {
             return [];
         }
 
-        doc = this.clean_doc(doc);
+        doc = this.preprocess_doc(doc);
 
         // Deinflected form (ex. tests -> test)
         let expression = this.get_expression(doc);
