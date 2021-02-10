@@ -23,6 +23,16 @@
   margin: 3px 0;
   padding: 0 3px 3px;
   border-bottom: 2px #666 solid;
+  cursor: move; /* fallback if grab cursor is unsupported */
+  cursor: grab;
+  cursor: -moz-grab;
+  cursor: -webkit-grab;
+}
+
+.odh-headsection:active {
+    cursor: grabbing;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
 }
 
 .odh-expression {

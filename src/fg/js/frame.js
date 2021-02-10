@@ -56,6 +56,48 @@ function registerSoundLinks() {
     }
 }
 
+function registerDragbar() {
+    let headsec = document.querySelector(".odh-headsection");
+    if (!headsec) {
+        return;
+    }
+
+    let X_mouse = 0;
+    let Y_mouse = 0;
+
+    let reposition = (e_move) => {
+        let dx = e_move.screenX - X_mouse;
+        let dy = e_move.screenY - Y_mouse;
+        // fire the event to the ODHFront instance
+        let delta = {"x": dx, "y": dy};
+
+        // Update the iframe in incremental fashion
+        window.parent.postMessage({
+            action: 'moveIFrame',
+            params: {
+                delta: delta,
+            }
+        }, '*');
+
+        // update the mouse position
+        X_mouse = e_move.screenX;
+        Y_mouse = e_move.screenY;
+    }
+
+    headsec.addEventListener("mousedown", (e_down) => {
+        X_mouse = e_down.screenX;
+        Y_mouse = e_down.screenY;
+        headsec.addEventListener("mousemove", reposition);
+
+        e_down.stopPropagation();
+        e_down.preventDefault();
+    });
+
+    headsec.addEventListener("mouseup", (e) => {
+        headsec.removeEventListener("mousemove", reposition);
+    });
+}
+
 function initSpellnTranslation(){
     document.querySelector('#odh-container').appendChild(spell());
     document.querySelector('.spell-content').innerHTML=document.querySelector('#context').innerHTML;
@@ -95,6 +137,7 @@ function onDomContentLoaded() {
     registerAudioLinks();
     registerSoundLinks();
     registerHiddenClass();
+    registerDragbar();
     initSpellnTranslation();
 }
 

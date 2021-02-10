@@ -176,6 +176,12 @@ class ODHFront {
         this.audio[url] = audio;
     }
 
+    api_moveIFrame(params){
+        let delta = params.delta;
+        // move the frame according to the (delta.x, delta.y)
+        this.popup.moveTo(delta);
+    }
+
     buildNote(result) {
         //get 1 sentence around the expression.
         const expression = selectedText();

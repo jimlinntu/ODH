@@ -16,6 +16,11 @@ class Popup {
         this.setContent(content);
     }
 
+    moveTo(delta){
+        this.popup.style.left = `${parseInt(this.popup.style.left) + delta.x}px`;
+        this.popup.style.top = `${parseInt(this.popup.style.top) + delta.y}px`;
+    }
+
     showNextTo(point, content) {
 
         this.inject();
@@ -72,7 +77,11 @@ class Popup {
 
         this.popup = document.createElement('iframe');
         this.popup.id = 'odh-popup';
-        this.popup.addEventListener('mousedown', (e) => e.stopPropagation());
+        // This can prevent the event being propagated to the parent,
+        // causing the iframe to hide
+        this.popup.addEventListener('mousedown', (e) => {
+            e.stopPropagation();
+        });
         this.popup.addEventListener('scroll', (e) => e.stopPropagation());
 
         let simpread = document.querySelector('.simpread-read-root');
