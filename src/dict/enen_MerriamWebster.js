@@ -56,6 +56,11 @@ class enen_MerriamWebster {
         for (const e of elements) {
             e.remove();
         }
+        // Remove all scripts
+        elements = doc.querySelectorAll("script") || [];
+        for (const e of elements) {
+            e.remove();
+        }
         return doc;
     }
 
