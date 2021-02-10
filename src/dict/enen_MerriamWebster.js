@@ -46,6 +46,11 @@ class enen_MerriamWebster {
                 e.setAttribute("src", data_src);
             }
         }
+        // Remove Visit the Thesaurus for More
+        elements = doc.querySelectorAll(".widget-button") || [];
+        for (const e of elements) {
+            e.remove();
+        }
         return doc;
     }
 
@@ -122,7 +127,7 @@ class enen_MerriamWebster {
         for (const div of content_divs) {
             // Only leave: ".row" and "dictionary-entry-[0-9]+"
             if (div.className.includes("row") || div.id.includes("dictionary-entry-") ||
-                div.id.includes("art-anchor")) {
+                div.id.includes("art-anchor") || div.id.includes("synonyms-anchor")) {
                 wanted_divs.push(div);
             }
         }
@@ -240,12 +245,24 @@ class enen_MerriamWebster {
                 padding-bottom: 0;
             }
 
-            p a {
+            .mw-list a, p a {
                 background-image: linear-gradient(90deg,#97bece 100%,transparent 0);
                 background-position: 0 1.15em;
                 background-repeat: repeat-x;
                 background-size: 3px 1px;
                 color: #265667;
+            }
+
+            p.financial-title, p.function-label, p.function-title, span.function-label {
+                color: #225f73;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 18px;
+                font-stretch: normal;
+                font-style: normal;
+                font-weight: 700;
+                line-height: 22px;
+                letter-spacing: normal;
+                margin-bottom: .5rem;
             }
 
             h2, p.entryNumbers, p.hword2 {
@@ -325,6 +342,24 @@ class enen_MerriamWebster {
             .entry-attr .prs, .entry-attr.vrs, .entry-attr .word-syllables {
                 font-family: Open Sans,Helvetica,Arial,sans-serif;
             }
+
+            /* ----------------------- */
+            /*           .mw-list      */
+            .mw-list, p {
+                color: #303336;
+                font-family: Open Sans,Helvetica,Arial,sans-serif;
+                font-size: 18px;
+                font-stretch: normal;
+                font-weight: 400;
+                letter-spacing: .2px;
+                line-height: 22px;
+            }
+
+            .mw-list li {
+                display: inline;
+            }
+
+            /* ----------------------- */
 
             /* ----------------------- */
             /*           .sb           */
@@ -439,6 +474,15 @@ class enen_MerriamWebster {
 
             div {
                 display: block;
+            }
+
+            a, ul {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                font-size: 100%;
+                font: inherit;
+                vertical-align: baseline;
             }
             /* ----------------------- */
             * {
