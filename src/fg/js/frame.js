@@ -68,25 +68,29 @@ function registerDragbar() {
     let reposition = (e_move) => {
         let dx = e_move.screenX - X_mouse;
         let dy = e_move.screenY - Y_mouse;
-        // fire the event to the ODHFront instance
+
+        dx = Math.round(dx / window.devicePixelRatio);
+        dy = Math.round(dy / window.devicePixelRatio);
         let delta = {"x": dx, "y": dy};
 
-        // Update the iframe in incremental fashion
         window.parent.postMessage({
-            action: 'moveIFrame',
+            action: 'mousemove',
             params: {
                 delta: delta,
             }
         }, '*');
 
-        // update the mouse position
-        X_mouse = e_move.screenX;
-        Y_mouse = e_move.screenY;
     }
 
     headsec.addEventListener("mousedown", (e_down) => {
         X_mouse = e_down.screenX;
         Y_mouse = e_down.screenY;
+
+        window.parent.postMessage({
+            action: 'mousedown',
+            params: {}
+        }, "*");
+
         headsec.addEventListener("mousemove", reposition);
 
         e_down.stopPropagation();
@@ -94,6 +98,12 @@ function registerDragbar() {
     });
 
     headsec.addEventListener("mouseup", (e) => {
+
+        window.parent.postMessage({
+            action: 'mouseup',
+            params: {}
+        }, "*");
+
         headsec.removeEventListener("mousemove", reposition);
     });
 }

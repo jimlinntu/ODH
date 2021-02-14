@@ -4,6 +4,10 @@ class Popup {
     constructor() {
         this.popup = null;
         this.offset = 5;
+
+        // For the usage of mouse dragging
+        this.tmp_left = -1;
+        this.tmp_top = -1;
     }
 
     showAt(pos, content) {
@@ -16,9 +20,19 @@ class Popup {
         this.setContent(content);
     }
 
-    moveTo(delta){
-        this.popup.style.left = `${parseInt(this.popup.style.left) + delta.x}px`;
-        this.popup.style.top = `${parseInt(this.popup.style.top) + delta.y}px`;
+    mousedown(){
+        this.tmp_left = parseInt(this.popup.style.left);
+        this.tmp_top = parseInt(this.popup.style.top);
+    }
+
+    mousemove(delta){
+        this.popup.style.left = `${parseInt(this.tmp_left) + delta.x}px`;
+        this.popup.style.top = `${parseInt(this.tmp_top) + delta.y}px`;
+    }
+
+    mouseup(){
+        this.tmp_left = parseInt(this.popup.style.left);
+        this.tmp_top = parseInt(this.popup.style.top);
     }
 
     showNextTo(point, content) {

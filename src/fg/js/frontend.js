@@ -176,10 +176,17 @@ class ODHFront {
         this.audio[url] = audio;
     }
 
-    api_moveIFrame(params){
+    api_mousedown(params){
+        this.popup.mousedown();
+    }
+
+    api_mousemove(params){
         let delta = params.delta;
-        // move the frame according to the (delta.x, delta.y)
-        this.popup.moveTo(delta);
+        this.popup.mousemove(delta);
+    }
+
+    api_mouseup(params){
+        this.popup.mouseup();
     }
 
     buildNote(result) {
