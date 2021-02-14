@@ -7,7 +7,7 @@ class enen_MerriamWebster {
         this.mw_audio_ext = ".mp3";
     }
     async displayName() {
-        return 'Merriam Webster Dictionary';
+        return 'Merriam Webster EN->EN Dictionary';
     }
 
     async findTerm(word) {
