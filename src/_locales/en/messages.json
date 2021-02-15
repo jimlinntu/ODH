@@ -85,6 +85,7 @@
     "enen_Collins": { "message": "Collins EN->EN Dictionary" },
     "enen_LDOCE6MDX": { "message": "LDOCE6 EN->CN Dict.(MDX version)" },
     "enen_UrbanDict": { "message": "Urban EN->EN Dictionary" },
+    "enen_MerriamWebster": {"message": "Merriam Webster EN->EN Dictionary"},
     "enfr_Cambridge": { "message": "Cambridge EN->FR Dictionary" },
     "enfr_Collins": { "message": "Collins EN->FR Dictionary" },
     "esen_Spanishdict": { "message": "Spanishdict.com ES->CN Dictionary" },
