@@ -397,6 +397,20 @@ class enen_MerriamWebster {
                 padding-left: 33px;
             }
 
+            .vg .sb.letter-only {
+                padding-left: 0;
+            }
+
+            .vg .sb.letter-only span[class^=sb-]>.has-sn, .vg .sb.letter-only span[class^=sb-]>.no-subnum>.has-sn {
+                display: block;
+                padding-left: 33px;
+            }
+
+.vg .sb.letter-only span[class^=sb-]>.has-sn .letter, .vg .sb.letter-only span[class^=sb-]>.no-subnum>.has-sn .letter {
+                left: 0;
+                position: absolute;
+            }
+
             .vg .sb.has-let, .vg .sb.has-subnum {
                 padding-left: 66px;
             }
