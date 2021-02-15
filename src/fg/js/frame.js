@@ -62,15 +62,24 @@ function registerDragbar() {
         return;
     }
 
+    // https://stackoverflow.com/questions/10231805/get-iframe-src-param-from-inside-the-iframe-itself
+    let iframe = window.frameElement;
+
     let X_mouse = 0;
     let Y_mouse = 0;
 
-    let reposition = (e_move) => {
-        let dx = e_move.screenX - X_mouse;
-        let dy = e_move.screenY - Y_mouse;
+    let x_transform = (x) => {
+        return x + iframe.offsetLeft;
+    };
 
-        dx = Math.round(dx / window.devicePixelRatio);
-        dy = Math.round(dy / window.devicePixelRatio);
+    let y_transform = (y) => {
+        return y + iframe.offsetTop;
+    };
+
+    let reposition = (e_move) => {
+        let dx = x_transform(e_move.clientX) - X_mouse;
+        let dy = y_transform(e_move.clientY) - Y_mouse;
+
         let delta = {"x": dx, "y": dy};
 
         window.parent.postMessage({
@@ -83,8 +92,8 @@ function registerDragbar() {
     }
 
     headsec.addEventListener("mousedown", (e_down) => {
-        X_mouse = e_down.screenX;
-        Y_mouse = e_down.screenY;
+        X_mouse = x_transform(e_down.clientX);
+        Y_mouse = y_transform(e_down.clientY);
 
         window.parent.postMessage({
             action: 'mousedown',
