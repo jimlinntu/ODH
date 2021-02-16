@@ -36,6 +36,9 @@ class enen_MerriamWebster {
             if (href && href[0] === "/") {
                 let new_href = this.mw_root.slice(0, -1) + href;
                 e.setAttribute("href", new_href);
+            }else if(href && !href.includes("/")) {
+                let new_href = this.mw_base_url + href;
+                e.setAttribute("href", new_href);
             }
         }
         // Convert illustration data-src to src
